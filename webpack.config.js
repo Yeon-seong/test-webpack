@@ -9,6 +9,9 @@ const webpack = require('webpack');
 // 터미널 명령어를 웹팩에서도 사용할 수 있도록 해주는 모듈
 const childProcess = require('child_process');
 
+// dotenv : 전역 상수를 깃허브에 남기지 않음
+require('dotenv').config();
+
 
 /*
   module.exports : Node.js 환경에서 모듈을 밖으로 빼내는 노드 JS문법.
@@ -70,6 +73,11 @@ module.exports = {
         Committer : ${childProcess.execSync('git config user.name')}
         Commit Date : ${new Date().toLocaleString()}
       `
-    })
+    }),
+    // 웹팩으로 데이터를 관리하기
+    new webpack.DefinePlugin({
+      dev: JSON.stringify(process.env.DEV_API),
+      pro: JSON.stringify(process.env.PRO_API)
+    }),
   ]
 }

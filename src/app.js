@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // Loader에 의해 console.log를 alert로 바뀌어버림
 console.log(plus(10, 5));
 
+
+let env;
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+    env = dev;
+} else {
+    env = pro;
+}
+console.log(process.env.NODE_ENV);
+
+
 function minus(a, b) {
   return a - b;
 }
