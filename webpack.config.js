@@ -12,13 +12,19 @@ const childProcess = require('child_process');
 // dotenv : 전역 상수를 깃허브에 남기지 않음
 require('dotenv').config();
 
+// HTML 파일을 번들링 단계에서 컨트롤 할 수 있도록 도와주는 플러그인
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// 빌드 이전에 남아있는 결과물을 제거하는 플러그인
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+
 
 /*
   module.exports : Node.js 환경에서 모듈을 밖으로 빼내는 노드 JS문법.
   엔트리, 아웃풋 그리고 번들링 모드를 설정할 수 있습니다.
 */
 module.exports = {
-  mode: 'development', // 개발 환경
+  mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
 
   entry: {
     main: path.resolve('./src/app.js')
@@ -79,5 +85,10 @@ module.exports = {
       dev: JSON.stringify(process.env.DEV_API),
       pro: JSON.stringify(process.env.PRO_API)
     }),
+    // 
+    new HtmlWebpackPlugin({
+      template: './src/index.html', // 목표 html 파일의 위치입니다.
+    }),
+    new CleanWebpackPlugin()
   ]
 }
