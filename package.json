@@ -5,14 +5,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test2": "echo \"안녕하세요 이다빈의 웹팩 명령어 입니다. 제가 만들었어요.\" && exit 1",
-    "build": "webpack"
+    "build": "cross-env NODE_ENV=development webpack --watch --progress",
+    "build:pro": "cross-env NODE_ENV=production webpack --watch --progress"
   },
   "author": "Yeon-seong",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.5",
+    "html-webpack-plugin": "^5.6.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
